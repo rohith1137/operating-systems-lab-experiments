@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main() {
+    int frames[3], time[3], pages[10];
+    int n, i, j, t = 0, pos, min;
+
+    for (i = 0; i < 3; i++)
+        frames[i] = -1;
+
+    printf("Enter number of pages: ");
+    scanf("%d", &n);
+
+    printf("Enter page reference string:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &pages[i]);
+        for (j = 0; j < 3; j++) {
+            if (frames[j] == pages[i]) {
+                time[j] = ++t;
+                break;
+            }
+        }
+        if (j == 3) {
+            min = 0;
+            for (j = 1; j < 3; j++)
+                if (time[j] < time[min]) min = j;
+            frames[min] = pages[i];
+            time[min] = ++t;
+        }
+    }
+
+    printf("Final Frames: ");
+    for (i = 0; i < 3; i++)
+        printf("%d ", frames[i]);
+
+    return 0;
+}
